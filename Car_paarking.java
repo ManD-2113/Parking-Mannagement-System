@@ -49,6 +49,7 @@ class Floorslots {
 public class Car_paarking {
     static Floorslots f1 = new Floorslots(5, 10, "A-1 A-10 B-2 B-5 C-1 C-8 D-2 D-4 E-5 E-10");
     static List<Details> data = new ArrayList<>();
+    static List<Details> reportData = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -90,7 +91,7 @@ public class Car_paarking {
     public static String chackin(String cicarNo, String citime, String cicatagory ){
         String slot;
             for (Details cd : data) {
-                if((cd.carNo.equals(cicarNo))){
+                if(cd.carNo.equals(cicarNo)){
                     return "the car is already in parking";
                 }
             }
@@ -163,6 +164,8 @@ public class Car_paarking {
                     f1.totalSlotsarr.add(index, d.parkingSlot);
                     f1.bookedunreservedSlot.remove(d.parkingSlot);
                 }
+                reportData.add(d);
+                data.remove(d);
             return charge;
             }
         }
@@ -170,8 +173,8 @@ public class Car_paarking {
     }
 
     static void generateResponse(){
-        data.sort(Comparator.comparing((Details d) -> d.parkingSlot).thenComparing((Details d) -> d.chackINTime));
-        for (Details d : data) {
+        reportData.sort(Comparator.comparing((Details d) -> d.parkingSlot).thenComparing((Details d) -> d.chackINTime));
+        for (Details d : reportData) {
             System.out.println(d.parkingSlot+", "+d.carNo+", "+d.chackINTime+", "+d.chackOutTime+", "+d.charges+", "+d.category);
         }
     }
