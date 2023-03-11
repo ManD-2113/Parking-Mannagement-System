@@ -189,7 +189,9 @@ public class Car_paarking {
 
         Duration duration = Duration.between(start, end);
         int minutes = (int)duration.toMinutes();
-
+        if(minutes <= 0){
+            minutes = minutes +1440;
+        }
         return minutes;
     }
 }
